@@ -57,4 +57,26 @@ Add dependencies in to the pom .xml
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
+         <dependency>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>3.0.2</version>
+    </dependency>
+```
+
+Run postgres with docker
+
+```bash
+docker run --name taskdb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=taskdb -p 5432:5438 -d postgres
+```
+
+PanacheEntity provides ready-to-use methods like `id`, `persist()`, and `findAll()`. It makes ORM tasks much easier 🔥
+
+Add dependency quarkus-flyway to follow changes
+
+```bash
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-flyway</artifactId>
+</dependency>
 ```
