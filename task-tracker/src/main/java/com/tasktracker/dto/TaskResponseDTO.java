@@ -24,8 +24,10 @@ public class TaskResponseDTO {
             this.title = task.title;
             this.description = task.description;
             this.completed = task.completed;
-            this.createdAt = task.createdAt;
-            this.updatedAt = task.updatedAt;
+            if (task.auditInfo != null) {
+                this.createdAt = task.auditInfo.createdAt;
+                this.updatedAt = task.auditInfo.updatedAt;
+            }
         }
     }
 }

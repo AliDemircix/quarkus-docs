@@ -139,7 +139,8 @@ public class UserResource {
         }
         LocalDateTime start = startDate.atStartOfDay(); // 2025-04-15 00:00:00
         LocalDateTime end = endDate.atTime(23, 59, 59); // 2025-04-15 23:59:59
-        List<TaskModel> tasks = TaskModel.list("user = ?1 and completed = true and createdAt between ?2 and ?3",
+        List<TaskModel> tasks = TaskModel.list(
+                "user = ?1 and completed = true and auditInfo.createdAt between ?2 and ?3",
                 user, start, end);
 
         // Here we use TaskResponseDTO.TaskResponse to transform each task
@@ -179,7 +180,8 @@ public class UserResource {
         LocalDateTime start = startDate.atStartOfDay();
         LocalDateTime end = endDate.atTime(LocalTime.MAX);
 
-        return TaskModel.count("user = ?1 and completed = true and createdAt between ?2 and ?3", user, start, end);
+        return TaskModel.count("user = ?1 and completed = true and auditInfo.createdAt between ?2 and ?3", user, start,
+                end);
     }
 
 }
