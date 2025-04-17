@@ -45,7 +45,7 @@ public class TaskResource {
     @Path("/tasks/{id}")
     @Transactional
     @Operation(summary = "Update task", description = "This endpoint updates an existing task in the task list.")
-    public Response updateTask(@PathParam("id") Long taskId, TaskDTO taskDTO) {
+    public Response updateTask(@PathParam("id") Long taskId, @Valid TaskDTO taskDTO) {
         TaskModel task = TaskModel.findById(taskId);
         if (task == null) {
             throw new NotFoundException("Task not found"); // 404 Not Found
@@ -53,7 +53,7 @@ public class TaskResource {
         task.title = taskDTO.title;
         task.description = taskDTO.description;
         task.completed = taskDTO.completed;
-        return Response.ok(task).build();
+        return Response.ok().entity(task).build();
     }
 
     @DELETE
